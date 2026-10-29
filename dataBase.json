@@ -1,0 +1,28 @@
+{
+  "inscriptions": [
+    {
+      "id": "1",
+      "nom": "El Amrani",
+      "prenom": "Sara",
+      "email": "sara@email.com",
+      "password": "123456",
+      "dateNaissance": "2002-05-14",
+      "age": 24,
+      "telephone": "0612345678",
+      "sexe": "femme",
+      "niveau": "3",
+      "filiere": "Intelligence artificielle",
+      "motivation": "Je souhaite développer mes compétences en intelligence artificielle.",
+      "cv": "cv_sara.pdf",
+      "technologies": [
+        "html",
+        "css",
+        "python"
+      ],
+      "domaines": [
+        "web",
+        "ia"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //exercice1
+        // let n;
+        // do{
+        //     n=prompt("Saisir un nombre positive");
+        // }while(n<0);
+        // document.write("le nombre saisie est "+n);
+
+        /*Afficher tous les nombres pairs jusqu’à N
+        N est donné par l’utilisateur.
+        */
+    //    let number;
+    //    number=prompt("Saisir un nombre positif");
+    //    for(let i=1;i<=number;i++){
+    //     if(i%2==0){
+    //         document.write(i+'\n')
+    //     }
+
+    
+      // }
+
+    //  // let n = prompt("enter un nbr"),sum=0;
+
+    //   for(let i = 0;i<= n;i++){
+
+    //     sum += i;
+
+    //   }
+    //   document.write(sum) 
+         
+        let nombre = prompt("entrer un nombre : ");
+        let Nc=nombre.toString().length ; 
+        let s=0;
+        let n = nombre ; 
+        while(n>0){
+            i=n%10;
+            n=Math.floor(n/10);
+            s=s+i**Nc;
+        }
+        if(nombre==s){
+            alert(nombre+" Ce nombre est Armstrong ");
+
+        }
+        else{
+            alert(nombre+" n'est pas nombre est Armstrong ");
+        }
+
+    </script>
+</body>
+</html>
