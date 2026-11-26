@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        p[class="paragraph2"]{
-            border: solid blue 3px;
-            border-style: dotted;
-            margin: 20px;
-            padding: 10px;
-            background-color: aliceblue;
-            text-align: center;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 10px;
-            font-style: italic;
-            font-variant: small-caps;
-            font-display: swap;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="script.js"></script>
+  <title>Document</title>
 </head>
 <body>
-    <p class="paragraph1">Web Development</p>
-    <p class="paragraph2">Network Security</p>
+  <h3>Exercice 1</h3><br>
+  <div>
+    <button onclick="commencer()">Commencer</button>
+  </div> <br><br>
+  
+  <h3>Exercice 2</h3><br>
+  <div>
+    <label for="number">Saisissez un nombre :</label>
+    <input type="number" name="number" id="number" required>
+    <button onclick="calculerSomme()">Calculer la somme</button>
+    <button onclick="afficherNombresPairs()">Afficher les nombres pairs</button>
+    <button onclick="verifier0To100()">Vérifier les nombres de 0 à 100</button>
+  </div><br>
+  <p id="resultat"></p>
+
 </body>
 </html>

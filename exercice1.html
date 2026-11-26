@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire d'inscription</title>
+  <script src="script1.js" defer></script>
 </head>
 <body>
-    <h3>Tableau : 3 lignes et 2 colonnes</h3>
-    <table border="3" align="center">
-        <tr> 
-            <td colspan="2" align="center"> Amine   </td>  
-        </tr>
-        <tr>
-            <td>  Salma  </td>
-            <td rowspan="2"> Chaima   </td>
-        </tr>
-        <tr>
-            <td>  Dev Web  </td>
-        </tr>
-    </table>
-    <img src="" alt="">
+  <h1>Inscription</h1>
+
+  <form id="formInscription" name="inscription">
+    <p>
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom">
+    </p>
+
+    <p>
+      <label for="profession">Profession :</label>
+      <select id="profession" name="profession">
+        <option value="">Choisir une profession</option>
+        <option value="Technicien">Technicien</option>
+        <option value="Ingénieur">Ingénieur</option>
+        <option value="Médecin">Médecin</option>
+      </select>
+    </p>
+
+    <fieldset>
+      <legend>Sexe</legend>
+
+      <input type="radio" id="sexeH" name="sexe" value="H">
+      <label for="sexeH">H</label>
+
+      <input type="radio" id="sexeF" name="sexe" value="F">
+      <label for="sexeF">F</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Langues</legend>
+
+      <input type="checkbox" id="arabe" name="langue" value="Arabe">
+      <label for="arabe">Arabe</label>
+
+      <input type="checkbox" id="francais" name="langue" value="Français">
+      <label for="francais">Français</label>
+    </fieldset>
+
+    <p>
+      <button type="submit">Inscrire</button>
+      <button type="reset">Effacer</button>
+    </p>
+  </form>
+
+  <p id="message" role="alert"></p>
+
+  <h2>Récapitulatif</h2>
+  <pre id="recapitulatif"></pre>
 </body>
 </html>

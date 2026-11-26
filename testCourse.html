@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionnaire de Contacts</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      background-color: #eeeeee;
+    }
+
+    .conteneur {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #aaaaaa;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    .bloc {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      box-shadow: inset 0 0 4px #dddddd;
+    }
+
+    form {
+      max-width: 550px;
+      margin: auto;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 7px;
+      margin-bottom: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      font: inherit;
+    }
+
+    button {
+      padding: 8px 14px;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #message {
+      color: #b00020;
+      text-align: center;
+    }
+
+    #listeContacts {
+      list-style: none;
+      padding: 0;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+      padding: 15px;
+      background-color: white;
+      border: 1px solid #dddddd;
+      border-radius: 5px;
+    }
+
+    .informations {
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+      min-width: 0;
+      line-height: 1.6;
+    }
+
+    .supprimer {
+      background-color: #dc3545;
+    }
+
+    .supprimer:hover {
+      background-color: #b02a37;
+    }
+
+    @media (max-width: 600px) {
+      .conteneur {
+        padding: 15px;
+      }
+
+      .contact {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="conteneur">
+    <h1>Gestionnaire de Contacts</h1>
+
+    <section class="bloc">
+      <h2>Ajouter un Contact</h2>
+
+      <form id="formContact" name="contact" novalidate>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom">
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email">
+
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" name="telephone">
+
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <p id="message" role="alert"></p>
+    </section>
+
+    <section class="bloc">
+      <h2>Liste des Contacts</h2>
+      <ul id="listeContacts"></ul>
+    </section>
+  </main>
+
+  <script>
+    const formulaire = document.forms["contact"];
+    const message = document.getElementById("message");
+    const listeContacts = document.getElementById("listeContacts");
+
+    // Tableau contenant les objets représentant les contacts
+    const contacts = [];
+    let prochainId = 1;
+
+    formulaire.onsubmit = function (event) {
+      event.preventDefault();
+      message.textContent = "";
+
+      const champNom = formulaire.elements["nom"];
+      const champEmail = formulaire.elements["email"];
+      const champTelephone = formulaire.elements["telephone"];
+
+      const nom = champNom.value.trim();
+      const email = champEmail.value.trim();
+      const telephone = champTelephone.value.trim();
+
+      // Validation : afficher la première erreur
+      if (nom.length < 3) {
+        message.textContent =
+          "Le nom doit contenir au moins 3 caractères.";
+        champNom.focus();
+        return;
+      }
+
+      // Retirer les espaces avant de vérifier le champ email
+      champEmail.value = email;
+
+      if (email === "" || !champEmail.checkValidity()) {
+        message.textContent =
+          "Veuillez saisir une adresse email valide.";
+        champEmail.focus();
+        return;
+      }
+
+      if (telephone === "") {
+        message.textContent =
+          "Veuillez saisir un numéro de téléphone.";
+        champTelephone.focus();
+        return;
+      }
+
+      // Créer un objet contact
+      const contact = {
+        id: prochainId,
+        nom: nom,
+        email: email,
+        telephone: telephone
+      };
+
+      prochainId++;
+      contacts.push(contact);
+
+      afficherContacts();
+
+      formulaire.reset();
+      champNom.focus();
+    };
+
+    function afficherContacts() {
+      // Vider la liste avant de la reconstruire
+      listeContacts.textContent = "";
+
+      for (const contact of contacts) {
+        const ligne = document.createElement("li");
+        ligne.className = "contact";
+
+        const informations = document.createElement("div");
+        informations.className = "informations";
+
+        informations.textContent =
+          "Nom : " + contact.nom + "\n" +
+          "Email : " + contact.email + "\n" +
+          "Téléphone : " + contact.telephone;
+
+        const boutonSupprimer = document.createElement("button");
+        boutonSupprimer.type = "button";
+        boutonSupprimer.className = "supprimer";
+        boutonSupprimer.textContent = "Supprimer";
+
+        boutonSupprimer.onclick = function () {
+          supprimerContact(contact.id);
+        };
+
+        ligne.appendChild(informations);
+        ligne.appendChild(boutonSupprimer);
+        listeContacts.appendChild(ligne);
+      }
+    }
+
+    function supprimerContact(id) {
+      if (!confirm("Voulez-vous supprimer ce contact ?")) {
+        return;
+      }
+
+      const position = contacts.findIndex(function (contact) {
+        return contact.id === id;
+      });
+
+      if (position !== -1) {
+        contacts.splice(position, 1);
+        afficherContacts();
+      }
+    }
+  </script>
+</body>
+</html>
